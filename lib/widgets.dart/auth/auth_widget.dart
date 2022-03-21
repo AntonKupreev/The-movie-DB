@@ -1,6 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, prefer_const_declarations
-
-import 'dart:ui';
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, prefer_const_declarations, unused_import
 
 import 'package:flutter/material.dart';
 import 'package:themoviedb/widgets.dart/main_screen/main__screen_widget.dart';
