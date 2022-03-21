@@ -8,7 +8,6 @@ class MovieListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const image = AssetImage('images/600x900.webp');
     return ListView.builder(
       itemExtent: 163,
       itemCount: 10,
