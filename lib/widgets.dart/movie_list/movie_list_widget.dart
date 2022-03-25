@@ -1,93 +1,197 @@
-// ignore_for_file: unused_import, non_constant_identifier_names, prefer_const_constructors, sized_box_for_whitespace, prefer_const_literals_to_create_immutables
+// ignore_for_file: unused_import, non_constant_identifier_names, prefer_const_constructors, sized_box_for_whitespace, prefer_const_literals_to_create_immutables, unused_element
 
 import 'package:flutter/material.dart';
-//import 'package:spider/spider.dart';
 
-class MovieListWidget extends StatelessWidget {
-  const MovieListWidget({Key? key}) : super(key: key);
+//import 'package:spider/spider.dart';
+class Movie {
+  final int id;
+  final String imageName;
+  final String title;
+  final String time;
+  final String description;
+
+  Movie({
+    required this.id,
+    required this.imageName,
+    required this.title,
+    required this.time,
+    required this.description,
+  });
+}
+
+class MovieListWidget extends StatefulWidget {
+  MovieListWidget({Key? key}) : super(key: key);
+
+  @override
+  State<MovieListWidget> createState() => _MovieListWidgetState();
+}
+
+class _MovieListWidgetState extends State<MovieListWidget> {
+  final _movies = [
+    Movie(
+        id: 1,
+        imageName: 'images/600x900.webp',
+        title: 'Смертельная битва ',
+        time: 'April 7, 2021',
+        description:
+            'Боец смешанных единоборств Коул Янг не раз соглашался проиграть за деньги.'),
+    Movie(
+        id: 2,
+        imageName: 'images/600x900.webp',
+        title: 'Spider man ',
+        time: 'April 7, 2021',
+        description:
+            'Боец смешанных единоборств Коул Янг не раз соглашался проиграть за деньги.'),
+    Movie(
+        id: 3,
+        imageName: 'images/600x900.webp',
+        title: 'прибытие ',
+        time: 'April 7, 2021',
+        description:
+            'Боец смешанных единоборств Коул Янг не раз соглашался проиграть за деньги.'),
+    Movie(
+        id: 4,
+        imageName: 'images/600x900.webp',
+        title: 'Назад в будующее  ',
+        time: 'April 7, 2021',
+        description:
+            'Боец смешанных единоборств Коул Янг не раз соглашался проиграть за деньги.'),
+    Movie(
+        id: 5,
+        imageName: 'images/600x900.webp',
+        title: 'Черный краб ',
+        time: 'April 7, 2021',
+        description:
+            'Боец смешанных единоборств Коул Янг не раз соглашался проиграть за деньги.'),
+  ];
+  var _filteredMovies = <Movie>[];
+  final _searchController = TextEditingController();
+
+  void _searchMovies() {
+    final query = _searchController.text;
+    if (query.isNotEmpty) {
+      _filteredMovies = _movies.where((Movie movie) {
+        return movie.title.toLowerCase().contains(query.toLowerCase());
+      }).toList();
+    } else {
+      _filteredMovies = _movies;
+    }
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _filteredMovies = _movies;
+    _searchController.addListener(_searchMovies);
+  }
+
+  void _onMovieTab(int index) {
+    final id = _movies[index].id;
+    Navigator.of(context)
+        .pushNamed('/main_screen/movie_details', arguments: id);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemExtent: 163,
-      itemCount: 10,
-      itemBuilder: (BuildContext context, int index) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-          child: Stack(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(
-                    color: Colors.black.withOpacity(0.2),
-                  ),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      blurRadius: 8,
-                      offset: Offset(0, 2),
-                    ),
-                  ],
-                ),
-                clipBehavior: Clip.hardEdge,
-                child: Row(
-                  children: <Widget>[
-                    Image(
-                      image: AssetImage('images/600x900.webp'),
-                    ),
-                    SizedBox(
-                      width: 15,
-                    ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(height: 20),
-                          Text(
-                            'Mortal Combat',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          SizedBox(height: 5),
-                          Text(
-                            'April 7, 2021',
-                            style: TextStyle(color: Colors.grey),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          SizedBox(height: 5),
-                          Text(
-                            'Боец смешанных единоборств Коул Янг не раз соглашался проиграть за деньги. Он не знает о своем наследии и почему император Внешнего мира Шан Цзун посылает могущественного криомансера Саб-Зиро на охоту за Коулом. Янг боится за безопасность своей семьи, и майор спецназа Джакс, обладатель такой же отметки в виде дракона, как и у Коула, советует ему отправиться на поиски Сони Блейд. Вскоре Коул, Соня и наёмник Кано оказываются в храме Лорда Рейдена, Старшего Бога и защитника Земного царства, который дает убежище тем, кто носит метку. Здесь прибывшие тренируются с опытными воинами Лю Каном и Кун Лао, готовясь противостоять врагам из Внешнего мира, а для этого им нужно раскрыть в себе аркану — могущественную силу души',
-                            maxLines: 3,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ],
+    return Stack(
+      children: [
+        ListView.builder(
+          padding: EdgeInsets.only(top: 70),
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          itemExtent: 163,
+          itemCount: _filteredMovies.length,
+          itemBuilder: (BuildContext context, int index) {
+            final movie = _filteredMovies[index];
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+              child: Stack(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(
+                        color: Colors.black.withOpacity(0.2),
                       ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 8,
+                          offset: Offset(0, 2),
+                        ),
+                      ],
                     ),
-                    SizedBox(
-                      width: 10,
+                    clipBehavior: Clip.hardEdge,
+                    child: Row(
+                      children: <Widget>[
+                        Image(
+                          image: AssetImage(movie.imageName),
+                        ),
+                        SizedBox(
+                          width: 15,
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(height: 20),
+                              Text(
+                                movie.title,
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              SizedBox(height: 5),
+                              Text(
+                                movie.time,
+                                style: TextStyle(color: Colors.grey),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              SizedBox(height: 5),
+                              Text(
+                                movie.description,
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                  Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(10),
+                      onTap: () => _onMovieTab(index),
+                    ),
+                  ),
+                ],
               ),
-              Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(10),
-                  onTap: (() {
-                    print('11');
-                  }),
-                ),
-              ),
-            ],
+            );
+          },
+        ),
+        Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: TextField(
+            controller: _searchController,
+            decoration: InputDecoration(
+              labelText: 'Поиск',
+              filled: true,
+              fillColor: Colors.white.withAlpha(235),
+              border: OutlineInputBorder(),
+            ),
           ),
-        );
-      },
+        ),
+      ],
     );
   }
 }
