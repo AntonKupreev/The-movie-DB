@@ -1,7 +1,8 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:themoviedb/widgets.dart/movie_details/movie_detail_main_info_widget.dart';
+import 'package:themoviedb/widgets.dart/movie_details/movie_detail_main_screen_cast_info_widget.dart';
 
 class MovieDetailsWidget extends StatefulWidget {
   final int movieId;
@@ -26,6 +27,10 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
         child: ListView(
           children: [
             MovieDetailsMainInfoWidget(),
+            SizedBox(
+              height: 15,
+            ),
+            MovieDetailMainScreenCastInfoWidget(),
           ],
         ),
       ),
