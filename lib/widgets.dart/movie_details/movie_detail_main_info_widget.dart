@@ -8,50 +8,52 @@ class MovieDetailsMainInfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _TopPosterWidget(),
         Padding(
           padding: const EdgeInsets.all(15.0),
           child: _MovieNameWidget(),
         ),
+        _ScoreWidget(),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 80),
           child: _SummeryWidget(),
         ),
-        Text(
-          'Overview',
-          style: TextStyle(color: Colors.white),
+        Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: _OverviewWidget(),
         ),
-        Text(
-          'vsdflbmsfsmblsfdmbklsfbmsfklbnsfklbmflbsmfdbksfngbksfgbnsflgngkngkfgkngknkfgndgkmdglnmdgklnmdgknmgkndmgnkdgmndkgnmfg',
-          style: TextStyle(color: Colors.white),
+        Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: _DesccriptionWidget(),
         ),
-        Row(
-          children: [
-            Column(children: [
-              Text('Stefano Solima', style: TextStyle(color: Colors.white)),
-              Text('director', style: TextStyle(color: Colors.white)),
-            ]),
-            Column(children: [
-              Text('Stefano Solima', style: TextStyle(color: Colors.white)),
-              Text('director', style: TextStyle(color: Colors.white)),
-            ])
-          ],
+        SizedBox(
+          height: 20,
         ),
-        Row(
-          children: [
-            Column(children: [
-              Text('Stefano Solima', style: TextStyle(color: Colors.white)),
-              Text('director', style: TextStyle(color: Colors.white)),
-            ]),
-            Column(children: [
-              Text('Stefano Solima', style: TextStyle(color: Colors.white)),
-              Text('director', style: TextStyle(color: Colors.white)),
-            ])
-          ],
-        )
+        _PeopleWidgets(),
       ],
+    );
+  }
+
+  Text _OverviewWidget() {
+    return Text(
+      'Overview',
+      style: TextStyle(color: Colors.white),
+    );
+  }
+}
+
+class _DesccriptionWidget extends StatelessWidget {
+  const _DesccriptionWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      'vsdflbmsfsmblsfdmbklsfbmsfklbnsfklbmflbsmfdbksfngbksfgbnsflgngkngkfgkngknkfgndgkmdglnmdgklnmdgknmgkndmgnkdgmndkgnmfg',
+      style: TextStyle(color: Colors.white),
     );
   }
 }
@@ -102,6 +104,41 @@ class _MovieNameWidget extends StatelessWidget {
   }
 }
 
+class _ScoreWidget extends StatelessWidget {
+  const _ScoreWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        TextButton(
+          onPressed: () {},
+          child: Row(
+            children: [
+              Text('User Score'),
+            ],
+          ),
+        ),
+        Container(
+          color: Colors.grey,
+          width: 1,
+          height: 15,
+        ),
+        TextButton(
+          onPressed: () {},
+          child: Row(
+            children: [
+              Icon(Icons.play_arrow),
+              Text('Play Trailer'),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 class _SummeryWidget extends StatelessWidget {
   const _SummeryWidget({Key? key}) : super(key: key);
 
@@ -113,8 +150,86 @@ class _SummeryWidget extends StatelessWidget {
         'R 04/29/2021 (US) 1h49m Action, AQdventure, Thriller, War',
         maxLines: 3,
         textAlign: TextAlign.center,
-        style: TextStyle(color: Colors.white),
+        style: TextStyle(
+            color: Colors.white, fontSize: 16, fontWeight: FontWeight.w400),
       ),
+    );
+  }
+}
+
+class _PeopleWidgets extends StatelessWidget {
+  const _PeopleWidgets({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final nameStyle = TextStyle(
+      color: Colors.white,
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+    );
+    final jobTilteStyle = TextStyle(
+      color: Colors.white,
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+    );
+    return Column(
+      children: [
+        Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Text(
+                'Stefano Solima',
+                style: nameStyle,
+              ),
+              Text(
+                'director',
+                style: jobTilteStyle,
+              ),
+            ]),
+            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Text(
+                'Stefano Solima',
+                style: nameStyle,
+              ),
+              Text(
+                'director',
+                style: jobTilteStyle,
+              ),
+            ])
+          ],
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Text(
+                'Stefano Solima',
+                style: nameStyle,
+              ),
+              Text(
+                'director',
+                style: jobTilteStyle,
+              ),
+            ]),
+            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Text(
+                'Stefano Solima',
+                style: nameStyle,
+              ),
+              Text(
+                'director',
+                style: jobTilteStyle,
+              ),
+            ])
+          ],
+        )
+      ],
     );
   }
 }
