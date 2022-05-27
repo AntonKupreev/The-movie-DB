@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:themoviedb/widgets.dart/movie_list/movie_list_widget.dart';
+import 'package:themoviedb/ui/widgets.dart/movie_list/movie_list_widget.dart';
 
 class MainScreenWidget extends StatefulWidget {
   const MainScreenWidget({Key? key}) : super(key: key);
