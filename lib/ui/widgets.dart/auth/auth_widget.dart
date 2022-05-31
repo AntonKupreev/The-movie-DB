@@ -79,6 +79,15 @@ class _AuthButtonWidget extends StatelessWidget {
     final color = const Color(0xFF212529);
     final onPressed =
         model?.canStartAuth == true ? () => model?.auth(context) : null;
+    final child = model?.isAuthProgress == true
+        ? SizedBox(
+            width: 15,
+            height: 15,
+            child: CircularProgressIndicator(
+              strokeWidth: 2,
+            ),
+          )
+        : const Text('Login');
     return ElevatedButton(
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all(Colors.blue),
@@ -94,7 +103,7 @@ class _AuthButtonWidget extends StatelessWidget {
         ),
       ),
       onPressed: onPressed,
-      child: Text('Login'),
+      child: child,
     );
   }
 }

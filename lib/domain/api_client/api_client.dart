@@ -6,8 +6,18 @@ class ApiClient {
 
   static const _host = 'https://api.themoviedb.org/3';
   static const _imageUrl = 'https://image.tmdb.org/t/p/w500';
-
   static const _apiKey = '0a2a46b559a0978cc8e87ba34037430';
+
+  Future<String> auth({
+    required String username,
+    required String password,
+  }) async {
+    final token = await _makeToken();
+    final validToken = await _validateUser(
+        username: username, password: password, requestToken: token);
+    final sessionId = await _makeSession(requestToken: validToken);
+    return sessionId;
+  }
 
   Uri _makeUri(String path, [Map<String, dynamic>? parameters]) {
     final uri = Uri.parse('$_host$path');
@@ -18,7 +28,7 @@ class ApiClient {
     }
   }
 
-  Future<String> makeToken() async {
+  Future<String> _makeToken() async {
     final url = _makeUri(
         '/authentication/token/new', <String, dynamic>{'api_key': _apiKey});
 
@@ -29,7 +39,7 @@ class ApiClient {
     return token;
   }
 
-  Future<String> validateUser(
+  Future<String> _validateUser(
       {required String username,
       required String password,
       required String requestToken}) async {
@@ -53,7 +63,7 @@ class ApiClient {
     return token;
   }
 
-  Future<String> makeSession({
+  Future<String> _makeSession({
     required String requestToken,
   }) async {
     final url = _makeUri(
