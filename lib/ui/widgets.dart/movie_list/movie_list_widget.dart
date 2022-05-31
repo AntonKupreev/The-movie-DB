@@ -1,6 +1,7 @@
 // ignore_for_file: unused_import, non_constant_identifier_names, prefer_const_constructors, sized_box_for_whitespace, prefer_const_literals_to_create_immutables, unused_element
 
 import 'package:flutter/material.dart';
+import 'package:themoviedb/ui/navigation/main_navigation.dart';
 
 //import 'package:spider/spider.dart';
 class Movie {
@@ -90,7 +91,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
   void _onMovieTab(int index) {
     final id = _movies[index].id;
     Navigator.of(context)
-        .pushNamed('/main_screen/movie_details', arguments: id);
+        .pushNamed(MainNavigationRoutesNames.movieDetails, arguments: id);
   }
 
   @override
